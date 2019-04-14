@@ -1,22 +1,14 @@
-package com.qianfeng.dao;
+package com.qianfeng.service;
+
+
 
 import com.qianfeng.entity.User;
 import com.qianfeng.vo.VUserRoleInfo;
 
 import java.util.List;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+public interface UserService {
 
     /**
      *
@@ -37,7 +29,7 @@ public interface UserMapper {
     /**
      *  获取用户人数
      * @return
-     *      成功返回总人数，失败返回0
+     *      成功返回总人数,失败返回0
      */
     public int findUserCount();
 }

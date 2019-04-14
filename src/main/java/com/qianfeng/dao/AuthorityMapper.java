@@ -1,6 +1,9 @@
 package com.qianfeng.dao;
 
 import com.qianfeng.entity.Authority;
+import com.qianfeng.vo.VMenuInfo;
+
+import java.util.List;
 
 public interface AuthorityMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,12 @@ public interface AuthorityMapper {
     int updateByPrimaryKeySelective(Authority record);
 
     int updateByPrimaryKey(Authority record);
+
+    /**
+     * 根据用户id获取权限
+     * @param id
+     *      用户id
+     * @return
+     */
+    public List<VMenuInfo> findAuthorityAll(int id);
 }

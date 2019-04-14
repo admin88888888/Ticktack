@@ -103,4 +103,37 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--额外添加-->
+  <resultMap id="VMenuMap" type="com.qianfeng.vo.VMenuInfo">
+    <id property="id" column="bid"></id>
+    <result property="aicon" column="baicon"></result>
+    <result property="aurl" column="baurl"></result>
+    <result property="title" column="btitle"></result>
+
+    <collection property="menuList"
+                javaType="java.util.ArrayList"
+                ofType="com.qianfeng.vo.VMenuInfo"
+    >
+      <id property="id" column="aid"></id>
+      <result property="aicon" column="aaicon"></result>
+      <result property="aurl" column="aaurl"></result>
+      <result property="title" column="atitle"></result>
+    </collection>
+  </resultMap>
+
+  <select id="findAuthorityAll" parameterType="int" resultMap="VMenuMap">
+      select b.id bid, b.aicon baicon,b.aurl baurl, b.title btitle, a.id aid, a.aicon aaicon,a.aurl aaurl,a.title atitle from t_user u
+      inner join t_userrole ur
+      on u.id = ur.uid
+      inner join t_role r
+      on ur.rid = r.id
+      inner join t_roleauthority ra
+      on r.id = ra.rid
+      inner join t_authority a
+      on ra.aid = a.id
+      inner join t_authority b
+      on a.parentId = b.id
+	  where u.id = #{id}
+    </select>
 </mapper>

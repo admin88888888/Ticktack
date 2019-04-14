@@ -103,4 +103,26 @@
       headphoto = #{headphoto,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--额外添加-->
+  <!--根据工号获取员工姓名-->
+  <select id="findPwdByNo" parameterType="String" resultType="com.qianfeng.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where no = #{no}
+  </select>
+
+  <!--查询所有用户角色信息-->
+  <select id="findAllUserRole" resultType="com.qianfeng.vo.VUserRoleInfo">
+    select u.id, u.no, u.name, u.flag ,r.info from t_user u
+    inner join t_userrole ur
+    on u.id = ur.uid
+    inner join t_role r
+    on ur.rid = r.id
+  </select>
+  <select id="findUserCount" resultType="int">
+    select count(1) from t_user
+  </select>
 </mapper>

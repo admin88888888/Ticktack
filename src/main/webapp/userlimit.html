@@ -66,13 +66,13 @@
         //第一个实例
         tableIns = table.render({
             elem: '#tbdata'
-            , url: 'userall.do' //数据接口
+            , url: 'findAllUserRole.do' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: '序号', sort: true, fixed: 'left'}
                 , {field: 'no', title: '工号'}
                 , {field: 'name', title: '姓名', sort: true}
-                , {field: 'role', title: '职位', sort: true}
+                , {field: 'info', title: '职位', sort: true}
                 , {
                     field: 'flag', title: '有/无效', templet: function (obj) {
                         var r;
@@ -182,20 +182,5 @@
     }
 </script>
 </body>
-<div style="display: none;margin-top: 10px;width: 480px" id="dvlay">
-    <form id="fm1" class="layui-form layui-form-pane" >
-        <div class="layui-form-item" pane >
-            <label class="layui-form-label">工号：</label>
-            <div class="layui-input-inline">
-                <input id="uid" name="id" readonly class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item" pane>
-            <label class="layui-form-label">角色：</label>
-            <div class="layui-input-inline" id="dv1">
 
-            </div>
-        </div>
-    </form>
-</div>
 </html>

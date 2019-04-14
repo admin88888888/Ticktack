@@ -22,25 +22,24 @@
 <body class="layui-bg-black">
 	<div class="layui-canvs"></div>
 	<div class="layui-layout layui-layout-login">
-		<form action="login.do" method="post">
+		<form action="login.do" method="post" >
 			<h1>
 				<strong>滴答办公系统登录</strong> <em>Tick-tock Office System</em>
 			</h1>
 			<div class="layui-user-icon larry-login">
 				<input type="text" placeholder="账号" class="login_txtbx" name="no"
-					value="admin" />
+					 />
 			</div>
 			<div class="layui-pwd-icon larry-login">
-				<input type="password" placeholder="密码" name="pass" value="admin"
+				<input type="password" placeholder="密码" name="password"
 					class="login_txtbx" />
 			</div>
 			<input type="hidden" name="ip" id="ip1"> <input type="hidden"
 				name="city" id="cy1">
-			<div class="feri-code">
-				<div id="mpanel4"></div>
+			<div class="feri-code">				<div id="mpanel4"></div>
 			</div>
 			<div class="layui-submit larry-login">
-				<input type="submit" id="btn1" disabled="disabled" value="立即登陆"
+				<input type="submit"  value="立即登陆"
 					class="submit_btn" />
 			</div>
 		</form>
@@ -76,6 +75,8 @@
 				}
 			});
 		});
+
+
 	</script>
 </body>
 </html>
