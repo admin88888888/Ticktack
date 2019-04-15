@@ -149,4 +149,32 @@
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--额外添加-->
+  <!--分页查询考勤管理代办信息-->
+  <select id="findCheckToDo" parameterType="map" resultType="com.qianfeng.entity.Check">
+    select <include refid="Base_Column_List" />
+     from t_check where flag = 1 limit #{start}, #{limit}
+  </select>
+
+  <!--获取考勤管理信息总数-->
+  <select id="findCheckCount" resultType="int">
+    select count(1) from t_check
+  </select>
+
+  <!--获取待处理总数-->
+  <select id="findToDoCount"  resultType="int">
+    select count(1) from t_check where flag = 1
+  </select>
+
+  <!--获取我的记录总数-->
+  <select id="findRecordCount" parameterType="String" resultType="int">
+    select count(1) from t_check where startname = #{startname}
+  </select>
+
+  <select id="findCheckAll" parameterType="map" resultType="com.qianfeng.entity.Check">
+    select <include refid="Base_Column_List" />
+    from t_check where startname = #{startname} limit #{start}, #{limit}
+  </select>
 </mapper>

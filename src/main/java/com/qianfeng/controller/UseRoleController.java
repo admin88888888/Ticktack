@@ -18,13 +18,13 @@ public class UseRoleController {
     private UserService userService;
 
     @RequestMapping("/findAllUserRole.do")
-   public Map<String,Object> findAllUserRole(){
+   public Map<String,Object> findAllUserRole(int page,int limit){
 
 
         Map<String, Object> map = new HashMap<>();
 
-        try {
-            List<VUserRoleInfo> list = userService.findAllUserRole();
+
+            List<VUserRoleInfo> list = userService.findAllUserRole(page,limit);
             int userCount = userService.findUserCount();
             map.put("code", 0); // 0 表示成功
             map.put("msg", "");
@@ -32,10 +32,7 @@ public class UseRoleController {
             map.put("data", list);
 
             return map;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
 
     }
 }

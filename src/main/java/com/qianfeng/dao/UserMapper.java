@@ -2,6 +2,7 @@ package com.qianfeng.dao;
 
 import com.qianfeng.entity.User;
 import com.qianfeng.vo.VUserRoleInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public interface UserMapper {
      * 获取所有用户角色信息
      * @return
      */
-    public List<VUserRoleInfo> findAllUserRole();
+    public List<VUserRoleInfo> findAllUserRole(@Param("start") int start,@Param("limit") int limit);
 
     /**
      *  获取用户人数

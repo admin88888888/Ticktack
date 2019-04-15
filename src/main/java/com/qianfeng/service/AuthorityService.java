@@ -1,5 +1,6 @@
 package com.qianfeng.service;
 
+import com.qianfeng.entity.Authority;
 import com.qianfeng.vo.VMenuInfo;
 
 
@@ -13,4 +14,18 @@ public interface AuthorityService  {
      * @return
      */
     public List<VMenuInfo> findAuthorityAll(int id);
+
+    /**
+     * 获取所有权限信息
+     * @return
+     *      成功返回权限集合，失败为null
+     */
+    List<Authority> findAll(int page,int limit);
+
+    /**
+     * 获取所有权限总数
+     * @return
+     *      成功返回总数，失败返回0
+     */
+    int findAuthorityCount();
 }

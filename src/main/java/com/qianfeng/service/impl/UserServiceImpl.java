@@ -21,11 +21,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<VUserRoleInfo> findAllUserRole() {
+    public List<VUserRoleInfo> findAllUserRole(int page,int limit) {
         List<VUserRoleInfo> list = null;
-
+        int start = (page - 1) * limit;
         try {
-            list = userMapper.findAllUserRole();
+
+            list = userMapper.findAllUserRole(start, limit);
         } catch (Exception e) {
             e.printStackTrace();
         }

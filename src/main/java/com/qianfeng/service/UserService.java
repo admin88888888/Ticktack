@@ -24,7 +24,7 @@ public interface UserService {
      * 获取所有用户角色信息
      * @return
      */
-    public List<VUserRoleInfo> findAllUserRole();
+    public List<VUserRoleInfo> findAllUserRole(int page,int limit);
 
     /**
      *  获取用户人数

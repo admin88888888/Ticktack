@@ -65,13 +65,12 @@
         var table = layui.table;
         form1=layui.form;
 
-
         tableIns = table.render({
             elem: '#tbdata'
-            , url: 'rolepage.do' //数据接口
-            , page: false //关闭分页
+            , url: 'roleList.do' //数据接口
+            , page: true //关闭分页
             , cols: [[ //表头
-                {field: 'id', title: '序号', sort: true, fixed: 'left'}
+                {type: 'numbers', title: '序号', sort: true, fixed: 'left'}
                 , {field: 'name', title: '角色名称'}
                 , {field: 'info', title: '角色备注'}
                 , {field: 'right', title: '操作', toolbar: "#barop"}

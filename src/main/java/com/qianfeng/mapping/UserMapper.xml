@@ -121,6 +121,7 @@
     on u.id = ur.uid
     inner join t_role r
     on ur.rid = r.id
+    limit #{start},#{limit}
   </select>
   <select id="findUserCount" resultType="int">
     select count(1) from t_user
