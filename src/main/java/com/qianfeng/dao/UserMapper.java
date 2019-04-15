@@ -33,12 +33,17 @@ public interface UserMapper {
      * 获取所有用户角色信息
      * @return
      */
-    public List<VUserRoleInfo> findAllUserRole(@Param("start") int start,@Param("limit") int limit);
+    public List<VUserRoleInfo> findAllUserRole(@Param("start") int start,@Param("limit") int limit, @Param("no")String no, @Param("flag") Integer flag);
 
     /**
      *  获取用户人数
      * @return
      *      成功返回总人数，失败返回0
      */
-    public int findUserCount();
+    public int findUserRoleCount();
+
+    /**
+     * 删除用户角色
+     */
+    void UserRoleDelete(@Param("uid") Integer id, @Param("rid") Integer rid);
 }

@@ -2,6 +2,7 @@ package com.qianfeng.controller;
 
 import com.qianfeng.common.JsonBean;
 import com.qianfeng.service.UserService;
+import com.qianfeng.utils.JsonUtils;
 import com.qianfeng.vo.VUserRoleInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +19,14 @@ public class UseRoleController {
     private UserService userService;
 
     @RequestMapping("/findAllUserRole.do")
-   public Map<String,Object> findAllUserRole(int page,int limit){
+   public Map<String,Object> findAllUserRole(int page,int limit ,String no, Integer flag){
 
 
         Map<String, Object> map = new HashMap<>();
 
 
-            List<VUserRoleInfo> list = userService.findAllUserRole(page,limit);
-            int userCount = userService.findUserCount();
+            List<VUserRoleInfo> list = userService.findAllUserRole(page,limit,no,flag);
+            int userCount = userService.findUserRoleCount();
             map.put("code", 0); // 0 表示成功
             map.put("msg", "");
             map.put("count", userCount);
@@ -34,5 +35,12 @@ public class UseRoleController {
             return map;
 
 
+    }
+
+    @RequestMapping("userRoleDelete.do")
+    public JsonBean UserRoleDelete(Integer id, Integer rid){
+
+        userService.UserRoleDelete(id, rid);
+        return JsonUtils.createJsonBean(1000,null);
     }
 }

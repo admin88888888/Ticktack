@@ -22,7 +22,7 @@ public interface RoleMapper {
      *  获取所有角色信息
      * @return
      */
-    List<Role> selectRoleAll(@Param("start") int start, @Param("limit") int limit);
+    List<Role> selectRoleAll(@Param("start") int start, @Param("limit") int limit, @Param("name") String no, @Param("flag") Integer flag);
 
     /**
      *  获取所有角色总数

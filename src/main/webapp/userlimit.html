@@ -27,6 +27,7 @@
                 <label class="layui-form-label">用户：</label>
                 <div class="layui-input-block">
                     <select class="layui-input" id="fg">
+                        <option value="">--请选择--</option>
                         <option value="1">有效</option>
                         <option value="2">无效</option>
                     </select>
@@ -97,9 +98,9 @@
             if (obj.event === 'del') {
                 layer.confirm('是否确认删除用户?', function (index) {
                     $.ajax({
-                        url: "userdel.do",
+                        url: "userRoleDelete.do",
                         type: "POST",
-                        data: "id=" + data.id,
+                        data: {id: data.id, rid:data.rid},
                         success: function (data) {
                             if (data.code == 1000) {
                                 obj.del();//删除表格中的对应行数据

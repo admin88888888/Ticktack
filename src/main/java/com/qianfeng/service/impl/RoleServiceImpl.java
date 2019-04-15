@@ -14,12 +14,12 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
 
     @Override
-    public List<Role> selectRoleAll(int page,int limit) {
+    public List<Role> selectRoleAll(int page, int limit, String no, Integer flag) {
 
         List<Role> list = null;
         int start = (page - 1) * limit;
         try {
-            list = roleMapper.selectRoleAll(page, limit);
+            list = roleMapper.selectRoleAll(start, limit, no, flag);
         } catch (Exception e) {
             e.printStackTrace();
         }

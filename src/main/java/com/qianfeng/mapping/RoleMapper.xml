@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="info" jdbcType="VARCHAR" property="info" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
     <result column="parentId" jdbcType="INTEGER" property="parentid" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -83,8 +84,18 @@
   <!--额外添加-->
   <!--获取所有角色信息-->
   <select id="selectRoleAll" resultType="com.qianfeng.entity.Role">
-    select <include refid="Base_Column_List" />
-    from t_role limit #{start},#{limit}
+    select *
+    from t_role
+    <where>
+      <if test="name != null and name != ''">
+        and name like concat('%', #{name}, '%')
+      </if>
+      <if test="flag != null and flag != ''">
+        and flag = #{flag}
+      </if>
+
+    </where>
+    limit #{start},#{limit}
   </select>
 
   <!--获取所有角色总数-->

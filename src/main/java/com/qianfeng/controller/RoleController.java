@@ -19,8 +19,8 @@ public class RoleController {
 
     @RequestMapping("/roleList.do")
     @ResponseBody
-    public Map<String, Object> selectRoleAll(int page,int limit){
-        List<Role> list = roleService.selectRoleAll(page, limit);
+    public Map<String, Object> selectRoleAll(int page, int limit, String no, Integer flag){
+        List<Role> list = roleService.selectRoleAll(page, limit, no, flag);
         int count = roleService.selectRoleCount();
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0); // 0 表示成功

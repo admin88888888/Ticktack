@@ -116,14 +116,29 @@
 
   <!--查询所有用户角色信息-->
   <select id="findAllUserRole" resultType="com.qianfeng.vo.VUserRoleInfo">
-    select u.id, u.no, u.name, u.flag ,r.info from t_user u
+    select u.id, u.no, u.name, u.flag ,r.info, r.id rid from t_user u
     inner join t_userrole ur
     on u.id = ur.uid
     inner join t_role r
     on ur.rid = r.id
+    <where>
+      <if test="no != null and no != ''">
+        and u.no like concat('%', #{no}, '%')
+      </if>
+      <if test="flag != null and flag != '' ">
+        and u.flag = #{flag}
+      </if>
+        and r.flag = 1
+    </where>
     limit #{start},#{limit}
   </select>
-  <select id="findUserCount" resultType="int">
-    select count(1) from t_user
+
+  <!--获取用户角色总数-->
+  <select id="findUserRoleCount" resultType="int">
+    select count(1) from t_userrole
   </select>
+
+  <delete id="UserRoleDelete" parameterType="map">
+    delete from t_userrole where uid = #{uid} and rid = #{rid}
+  </delete>
 </mapper>

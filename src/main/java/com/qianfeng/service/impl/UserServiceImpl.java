@@ -21,12 +21,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<VUserRoleInfo> findAllUserRole(int page,int limit) {
+    public List<VUserRoleInfo> findAllUserRole(int page, int limit, String no, Integer flag) {
         List<VUserRoleInfo> list = null;
         int start = (page - 1) * limit;
         try {
 
-            list = userMapper.findAllUserRole(start, limit);
+            list = userMapper.findAllUserRole(start, limit, no , flag);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,14 +34,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int findUserCount() {
+    public int findUserRoleCount() {
         int count = 0;
         try {
-           count = userMapper.findUserCount();
+           count = userMapper.findUserRoleCount();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return count;
+    }
+
+    @Override
+    public void UserRoleDelete(Integer id, Integer rid) {
+
+        try {
+            userMapper.UserRoleDelete(id, rid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

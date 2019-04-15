@@ -4,6 +4,7 @@ package com.qianfeng.service;
 
 import com.qianfeng.entity.User;
 import com.qianfeng.vo.VUserRoleInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,12 +25,17 @@ public interface UserService {
      * 获取所有用户角色信息
      * @return
      */
-    public List<VUserRoleInfo> findAllUserRole(int page,int limit);
+    public List<VUserRoleInfo> findAllUserRole(int page, int limit, String no, Integer flag);
 
     /**
      *  获取用户人数
      * @return
      *      成功返回总人数,失败返回0
      */
-    public int findUserCount();
+    public int findUserRoleCount();
+
+    /**
+     * 删除用户角色
+     */
+    void UserRoleDelete(Integer id, Integer rid);
 }

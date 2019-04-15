@@ -27,6 +27,7 @@
 				<label class="layui-form-label">用户：</label>
 				<div class="layui-input-block">
 					<select class="layui-input" id="fg">
+						<option value="">--请选择--</option>
 						<option value="1">有效</option>
 						<option value="2">无效</option>
 					</select>
@@ -73,6 +74,21 @@
                 {type: 'numbers', title: '序号', sort: true, fixed: 'left'}
                 , {field: 'name', title: '角色名称'}
                 , {field: 'info', title: '角色备注'}
+                , {
+					field: 'flag', title: '有/无效', templet: function (obj) {
+						var r;
+						switch (obj.flag) {
+								//有效
+							case 1:
+								r = "<span style='color: #1E9FFF'>有效</span>";
+								break;
+							case 2:
+								r = "<span style='color: red'>无效</span>";
+								break;
+						}
+						return r;
+					}
+				}
                 , {field: 'right', title: '操作', toolbar: "#barop"}
             ]]
         });

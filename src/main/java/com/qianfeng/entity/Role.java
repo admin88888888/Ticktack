@@ -9,6 +9,16 @@ public class Role {
 
     private Integer parentid;
 
+    private Integer flag;
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     public Integer getId() {
         return id;
     }
