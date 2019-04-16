@@ -2,10 +2,12 @@ package com.qianfeng.service;
 
 
 
+
 import com.qianfeng.entity.User;
 import com.qianfeng.vo.VUserRoleInfo;
-import org.apache.ibatis.annotations.Param;
 
+
+import java.util.Collection;
 import java.util.List;
 
 
@@ -37,5 +39,20 @@ public interface UserService {
     /**
      * 删除用户角色
      */
-    void UserRoleDelete(Integer id, Integer rid);
+    void UserRoleDelete(Integer id);
+
+    /**
+     * 修改用户角色
+     * @param uid
+     * @param rids
+     */
+    void updateUserRole(Integer uid, String[] rids);
+
+    /**
+     * 获取上一级领导
+     * @return
+     */
+    Collection<User> findLeaders();
+
+
 }

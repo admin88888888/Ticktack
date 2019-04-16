@@ -1,5 +1,9 @@
 package com.qianfeng.vo;
 
+import com.qianfeng.entity.Role;
+
+import java.util.List;
+
 public class VUserRoleInfo {
 
     private Integer id;
@@ -10,25 +14,24 @@ public class VUserRoleInfo {
 
     private Integer flag;
 
-    private Integer rid;
+    /*private String info;
+    private Integer rid;*/
+    private List<Role> rids;
 
-    public Integer getRid() {
-        return rid;
+    public List<Role> getRids() {
+        return rids;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setRids(List<Role> rids) {
+        this.rids = rids;
     }
-
-    public String getInfo() {
+/*public String getInfo() {
         return info;
     }
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    private String info;
+    }*/
 
     public Integer getId() {
         return id;

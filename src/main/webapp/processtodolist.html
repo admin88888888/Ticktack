@@ -49,7 +49,7 @@
 		        if(obj.event === 'n'){
 		            layer.confirm('是否拒绝?', function(index){
 		                $.ajax({
-		                    url: "processupdate.do",
+		                    url: "updateMatter.do",
 		                    type: "POST",
 		                    data:"id="+data.id+"&flag=3&tid="+data.tid,
 		                    success: function(data){
@@ -65,7 +65,7 @@
 		            });
 		        } else if(obj.event === 'y'){//编辑 修改
                     $.ajax({
-                        url: "processupdate.do",
+                        url: "updateMatter.do",
                         type: "POST",
                         data:"id="+data.id+"&flag=2&tid="+data.tid,
                         success: function(data){

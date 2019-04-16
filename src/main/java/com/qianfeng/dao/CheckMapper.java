@@ -1,6 +1,7 @@
 package com.qianfeng.dao;
 
 import com.qianfeng.entity.Check;
+import com.qianfeng.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,6 +11,11 @@ public interface CheckMapper {
 
     int insert(Check record);
 
+    /**
+     * 添加信息
+     * @param record
+     * @return
+     */
     int insertSelective(Check record);
 
     Check selectByPrimaryKey(Integer id);
@@ -33,6 +39,8 @@ public interface CheckMapper {
      * @return
      */
     int findToDoCount();
+
+
 
     /**
      *  获取考勤管理信息总数
@@ -59,4 +67,22 @@ public interface CheckMapper {
      * @return
      */
     int findRecordCount(String startname);
+
+    /**
+     * 事项进行对指定记录进行状态改变flag为2同意，flag为3拒绝
+     * @param id
+     *      指定记录的id
+     * @param flag
+     *      改变记录的状态
+     */
+    void updateMatter(@Param("id") int id, @Param("flag") int flag);
+
+
+    /**
+     * 通过发起人姓名获取记录信息
+     * @param startname
+     * @return
+     */
+    List<Check> findCheckByStartName(String startname);
+
 }

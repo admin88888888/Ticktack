@@ -1,10 +1,12 @@
 package com.qianfeng.dao;
 
+import com.qianfeng.entity.Role;
 import com.qianfeng.entity.User;
 import com.qianfeng.vo.VUserRoleInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -45,5 +47,19 @@ public interface UserMapper {
     /**
      * 删除用户角色
      */
-    void UserRoleDelete(@Param("uid") Integer id, @Param("rid") Integer rid);
+    void UserRoleDelete(Integer id);
+
+    /**
+     * 获取上一级领导
+     * @param id
+     * @return
+     */
+    List<User> findLeaders(int id);
+
+    /**
+     * 获得我的角色信息
+     * @param id
+     * @return
+     */
+    Role findMyRole(int id);
 }

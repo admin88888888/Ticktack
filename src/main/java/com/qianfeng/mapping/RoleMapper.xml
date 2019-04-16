@@ -103,4 +103,26 @@
     select count(1)
     from t_role
   </select>
+
+  <!--获取有效的所有的角色信息-->
+  <select id="selectAll" resultType="com.qianfeng.entity.Role">
+     select *
+      from t_role where flag = 1
+  </select>
+
+  <!--改变角色状态【假删除】-->
+  <update id="roleFalseDelete" parameterType="int">
+    update t_role set flag = 2 where id = #{id}
+  </update>
+
+  <!-- 获得我的角色信息
+    Role findMyRole(int id);-->
+  <select id="findMyRole" parameterType="int" resultType="com.qianfeng.entity.Role">
+    select r.parentId from t_user u
+    inner join t_userrole ur
+    on u.id = ur.uid
+    inner join t_role r
+    on ur.rid = r.id
+    where u.id = #{id}
+  </select>
 </mapper>

@@ -17,5 +17,18 @@ public interface RoleService {
      */
     int selectRoleCount();
 
+    /**
+     * 获取有效的所有的角色信息
+     * @return
+     */
+    List<Role> selectAll();
+
+    /**
+     * 通过改变角色状态达到假删除角色
+     * @param id
+     *      角色id
+     */
+    void roleFalseDelete(Integer id);
+
 
 }

@@ -43,4 +43,20 @@ public interface CheckService {
      * @return
      */
     int findRecordCount(String startname);
+
+    /**
+     * 事项进行对指定记录进行状态改变flag为2同意，flag为3拒绝
+     * @param id
+     *      指定记录的id
+     * @param flag
+     *      改变记录的状态
+     */
+    void updateMatter(@Param("id") int id, @Param("flag") int flag);
+
+    /**
+     * 添加信息
+     * @param record
+     * @return
+     */
+    int insertSelective(Check record);
 }

@@ -36,4 +36,22 @@ public class RoleServiceImpl implements RoleService {
         }
         return count;
     }
+
+    @Override
+    public List<Role> selectAll() {
+
+        List<Role> list = null;
+        try {
+            list = roleMapper.selectAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public void roleFalseDelete(Integer id) {
+        roleMapper.roleFalseDelete(id);
+    }
+
 }

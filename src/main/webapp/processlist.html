@@ -56,9 +56,9 @@
 		        if(obj.event === 'n'){
 		            layer.confirm('是否取消?', function(index){
 		                $.ajax({
-		                    url: "processdel.do",
+		                    url: "updateMatter.do",
 		                    type: "POST",
-		                    data:"id="+data.id+"&pid="+data.pid,
+		                    data:"id="+data.id+"&flag=4&pid="+data.pid,
 		                    success: function(data){
 		                        if(data.code==1000){
 		                            obj.del();//删除表格中的对应行数据

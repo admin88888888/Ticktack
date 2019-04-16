@@ -2,7 +2,9 @@ package com.qianfeng.service.impl;
 
 import com.qianfeng.dao.CheckMapper;
 import com.qianfeng.entity.Check;
+import com.qianfeng.entity.User;
 import com.qianfeng.service.CheckService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +73,45 @@ public class CheckServiceImpl implements CheckService {
             e.printStackTrace();
         }
         return count;
+    }
+
+    @Override
+    public void updateMatter(int id, int flag) {
+
+        try {
+            checkMapper.updateMatter(id, flag);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int insertSelective(Check record) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        record.setStartname(user.getName());
+        record.setStartno(user.getNo());
+        record.setFlag(1);
+        int a = 10000;
+        int b = (int)(Math.random()*10000);
+        a += b;
+        String pid = a+"";
+        record.setPid(pid);
+        List<Check> list = checkMapper.findCheckByStartName(user.getName());
+        for (Check pids:list) {
+           if( pids.getPid() == record.getPid()){
+               return -1;
+           }
+        }
+
+
+
+
+        int i = 0;
+        try {
+          i =  checkMapper.insertSelective(record);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 }

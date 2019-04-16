@@ -19,7 +19,7 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     /**
-     *  获取所有角色信息
+     *  获取所有角色信息分页和条件查询
      * @return
      */
     List<Role> selectRoleAll(@Param("start") int start, @Param("limit") int limit, @Param("name") String no, @Param("flag") Integer flag);
@@ -29,4 +29,25 @@ public interface RoleMapper {
      * @return
      */
     int selectRoleCount();
+
+    /**
+     * 获取有效的所有的角色信息
+     * @return
+     */
+    List<Role> selectAll();
+
+    /**
+     * 通过改变角色状态达到假删除角色
+     * @param id
+     *      角色id
+     */
+    void roleFalseDelete(Integer id);
+
+    /**
+     * 获得我的角色信息
+     * @param id
+     * @return
+     */
+    List<Role> findMyRole(int id);
+
 }
