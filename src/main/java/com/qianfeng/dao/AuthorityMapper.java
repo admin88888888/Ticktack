@@ -40,4 +40,25 @@ public interface AuthorityMapper {
      *      成功返回总数，失败返回0
      */
     int findAuthorityCount();
+
+    /**
+     * 获取所有一级权限
+     * @return
+     */
+    List<Authority> findAuthorityAllOne();
+
+    /**
+     * 根据角色id获取角色拥有的一级权限
+     * @param id
+     *      角色id
+     * @return
+     */
+    List<Authority> findOneAuthorityByRoleId(int id);
+
+    /**
+     * 根据角色父级权限的id获得所有子id
+     * @param id
+     * @return
+     */
+    List<Authority> findRoleSecondAuthority(int id);
 }

@@ -149,4 +149,23 @@
     select count(1) from t_authority
   </select>
 
+  <!--获取所有一级权限-->
+  <select id="findAuthorityAllOne" resultType="com.qianfeng.entity.Authority">
+    select id, title from t_authority where  type = 0
+  </select>
+
+  <!--根据角色id获取角色拥有的一级权限-->
+  <select id="findOneAuthorityByRoleId" parameterType="int" resultType="com.qianfeng.entity.Authority">
+    select a.id ,a.title from t_role r
+    inner join t_roleauthority ra
+    on r.id = ra.rid
+    inner join t_authority a
+    on ra.aid = a.id
+    where a.type = 0 and r.id = #{id}
+  </select>
+
+  <!--根据角色父级权限的id获得所有子id-->
+  <select id="findRoleSecondAuthority" parameterType="int" resultType="com.qianfeng.entity.Authority">
+    select id from t_authority where parentId = #{id};
+  </select>
 </mapper>

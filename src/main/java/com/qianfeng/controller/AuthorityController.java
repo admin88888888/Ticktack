@@ -54,4 +54,11 @@ public class AuthorityController {
 
         return map;
     }
+
+    @RequestMapping("roleOneAll.do")
+    public List<Authority> findAuthorityOneAll(){
+
+        List<Authority> list = authorityService.findAuthorityAllOne();
+        return list;
+    }
 }

@@ -88,13 +88,10 @@ public class UserServiceImpl implements UserService {
                 return;
             }
 
-            /*if(list.size() == 1 && list.get(0) == ridList.get(0)){
-                return;
-            } else*/
+
             for (int i = 0; i < list.size(); i++){
                 if(!ridList.contains(list.get(i))){
                     userRoleMapper.deleteUserRole(id, list.get(i));
-
                 }
                 if(!list.contains(ridList.get(i))){
                     userRoleMapper.addUserRole(id, ridList.get(i));
@@ -104,15 +101,18 @@ public class UserServiceImpl implements UserService {
         /**
          * 查询出数据库总用户角色数量比传来的用户角色数量多或相等时
          */
-        else if(list.size() <= ridList.size()){
-
-
+        else if(list.size() < ridList.size()){
 
             /**
              * 如果查出的数量小于所有传入的，传入的删除包含查询的所有元素，
              * 删除两集合的交集，
              * 执行添加操作，添加数据库中未有的角色权限
              */
+            for(int i = 0; i < list.size(); i++){
+                if(!ridList.contains(list.get(i))){
+                    userRoleMapper.deleteUserRole(id, list.get(i));
+                }
+            }
             ridList.removeAll(list);
             Object[] rid  =ridList.toArray();
             for (int i = 0; i < rid.length; i++) {
@@ -125,11 +125,17 @@ public class UserServiceImpl implements UserService {
              * 执行删除操作，删除数据库多余的权限
              */
         } else if (list.size() > ridList.size()) {
+            for(int i = 0; i < ridList.size(); i++){
+                if (!list.contains(ridList.get(i))) {
+                    userRoleMapper.addUserRole(id, ridList.get(i));
+                }
+            }
             list.removeAll(ridList);
             Object[] rid = list.toArray();
             for (int i = 0; i < rid.length; i++) {
                 userRoleMapper.deleteUserRole(id, (Integer) rid[i]);
             }
+
         }
 
     }

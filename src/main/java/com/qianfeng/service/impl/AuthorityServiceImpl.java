@@ -49,4 +49,17 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
         return count;
     }
+
+    @Override
+    public List<Authority> findAuthorityAllOne() {
+        List<Authority> list = null;
+        try {
+            list = authorityMapper.findAuthorityAllOne();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
 }

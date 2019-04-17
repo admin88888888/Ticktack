@@ -83,7 +83,7 @@
 
   <!--额外添加-->
   <!--获取所有角色信息-->
-  <select id="selectRoleAll" resultType="com.qianfeng.entity.Role">
+  <select id="selectRoleAll" resultType="com.qianfeng.vo.VRolePower">
     select *
     from t_role
     <where>
@@ -125,4 +125,23 @@
     on ur.rid = r.id
     where u.id = #{id}
   </select>
+
+  <!--添加角色权限-->
+  <insert id="addRoleAuthority" parameterType="map">
+    insert into t_roleauthority (rid,aid) VALUE(#{rid},#{aid}),
+    <foreach collection="array" item="item" separator=",">
+      (#{rid},#{item})
+    </foreach>
+
+  </insert>
+
+  <!--删除角色权限-->
+  <delete id="deleteRoleAuthorityByAid" parameterType="int">
+    DELETE  from t_roleauthority where aid = #{aid}
+  </delete>
+
+  <delete id="deleteRoleAuthorityByRid" parameterType="int">
+    DELETE  from t_roleauthority where rid = #{rid}
+  </delete>
+
 </mapper>

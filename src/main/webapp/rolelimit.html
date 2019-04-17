@@ -149,16 +149,20 @@
     function loadRoles(user) {
         console.log(user)
         $("#uid").val(user.id);
-        $.get("roleall.do", null, function (arr) {
+        $.get("roleOneAll.do", null, function (arr) {
             $("#dv1").html("");
-            console.log(user.rids);
+            //console.log(user.rids);
             for (i = 0; i < arr.length; i++) {
-                if(user.rids.indexOf(arr[i].id)>-1){
-                    $("#dv1").append("<input type=\"checkbox\" name=\"rids\" value='" + arr[i].id + "' title=\"" + arr[i].info + "\" checked>");
-                }else{
-                    $("#dv1").append("<input type=\"checkbox\" name=\"rids\" value='" + arr[i].id + "' title=\"" + arr[i].info + "\">");
-                }
+                    $("#dv1").append("<input type=\"checkbox\" id=\"checkbox"+arr[i].id+"\" name=\"rids\" value='" + arr[i].id + "' title=\"" + arr[i].title + "\">");
+
             }
+			$(user.authorityList).each(function(){
+				for (i = 0; i < arr.length; i++) {
+					if(this.id == arr[i].id){
+						$("#checkbox"+arr[i].id+"").attr('checked', true)
+					}
+				}
+			})
             form1.render();
             layer.open({
                 area: ['500px', '300px'],
@@ -168,7 +172,7 @@
                 btn: ['确认', '取消'],
                 yes: function(index, layero){
                     $.ajax({
-                        url: "userroleedit.do",
+                        url: "roleAuthorityUpdate.do",
                         data: $("#fm1").serialize(),
                         success: function (obj) {
                             if (obj.code == 1000) {

@@ -1,6 +1,7 @@
 package com.qianfeng.service;
 
 import com.qianfeng.entity.Role;
+import com.qianfeng.vo.VRolePower;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface RoleService {
      *  获取所有角色信息
      * @return
      */
-    List<Role> selectRoleAll(int page, int limit, String no, Integer flag);
+    List<VRolePower> selectRoleAll(int page, int limit, String no, Integer flag);
 
     /**
      *  获取所有角色总数
@@ -31,4 +32,8 @@ public interface RoleService {
     void roleFalseDelete(Integer id);
 
 
+    /**
+     * 编辑角色权限
+     */
+    void updateRoleAuthority(int id, String[] rids);
 }

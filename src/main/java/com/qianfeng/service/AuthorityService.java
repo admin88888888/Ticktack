@@ -28,4 +28,10 @@ public interface AuthorityService  {
      *      成功返回总数，失败返回0
      */
     int findAuthorityCount();
+
+    /**
+     * 获取所有一级权限
+     * @return
+     */
+    List<Authority> findAuthorityAllOne();
 }
