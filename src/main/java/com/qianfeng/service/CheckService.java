@@ -59,4 +59,11 @@ public interface CheckService {
      * @return
      */
     int insertSelective(Check record);
+
+    /**
+     * 通过任务号查询记录
+     * @param pid
+     * @return
+     */
+    Check findByPid(String pid);
 }

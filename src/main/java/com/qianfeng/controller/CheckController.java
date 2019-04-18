@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,5 +82,15 @@ public class CheckController {
 
         checkService.insertSelective(record);
         return  "redirect:/processlist.html";
+    }
+
+    @RequestMapping("processecharts.do")
+    @ResponseBody
+    public List<Check> findByPid(String pid){
+        List<Check> list = new ArrayList<>();
+        Check check = checkService.findByPid(pid);
+        list.add(check);
+
+        return list;
     }
 }

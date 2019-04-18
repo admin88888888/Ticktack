@@ -11,6 +11,11 @@ public interface AuthorityMapper {
 
     int insert(Authority record);
 
+    /**
+     * 添加权限
+     * @param record
+     * @return
+     */
     int insertSelective(Authority record);
 
     Authority selectByPrimaryKey(Integer id);
@@ -61,4 +66,12 @@ public interface AuthorityMapper {
      * @return
      */
     List<Authority> findRoleSecondAuthority(int id);
+
+    /**
+     * 根据权限名称查询权限
+     * @param title
+     * @return
+     */
+    Authority findByTitle(String title);
+
 }

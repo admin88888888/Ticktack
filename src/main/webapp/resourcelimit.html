@@ -52,7 +52,7 @@
                       }
 				  }
 		      ,{field: 'parentId', title: '级别', templet: function (obj) {
-					  return obj.parentId==0?"一级页面":"二级页面"}}
+					  return obj.parentid==0?"一级页面":"二级页面"}}
 		      ,{field:'right', title: '操作',toolbar:"#barop"}
 		    ]]
 		  });
@@ -62,7 +62,7 @@
 		        if(obj.event === 'del'){
 		            layer.confirm('是否确认删除权限?', function(index){
 		                $.ajax({
-		                    url: "coursedelete.do",
+		                    url: "deleteAuthority.do",
 		                    type: "POST",
 		                    data:"id="+data.id,
 		                    success: function(data){
@@ -80,10 +80,13 @@
 		        	//get传递参数有中文，必须编码
 		        	//JSON.stringify 将对象转换为字符串
 		           location.href="courseupdate.html?d="+ encodeURI(JSON.stringify(data));
-		        }
+
+				}
 		});
 	});
+
 	function addAuth() {
+
         layer.open({
             area: ['500px', '380px'],
             title: '权限页面新增',
@@ -92,28 +95,32 @@
             btn: ['新增', '取消'],
             yes: function(index, layero){
                 $.ajax({
-                    url: "authorityadd.do",
+                    url: "authorityAdd.do",
 					method:"post",
                     data: $("#fm1").serialize(),
                     success: function (obj) {
                         if (obj.code == 1000) {
                             layer.msg("新增权限成功");
-                            searchData();
+                            //searchData();
                         } else {
                             layer.msg("新增权限失败");
                         }
                     }
                 })
+
                 layer.close(index);
+
             },cancel: function(){
             }
         });
+
+
     }
     function changePid(i) {
-		if(i==-1){
-            $.get("authorityroot.do",null,function (arr) {
+		if(i==1){
+            $.get("roleOneAll.do",null,function (arr) {
 				for(i=0;i<arr.length;i++){
-                    $("#spid").append("<option value=\""+arr[i].id+"\">"+arr[i].title+"</option>");
+                    $("#spid").append("<option  value=\""+arr[i].id+"\">"+arr[i].title+"</option>");
 				}
             $("#dvl1").css("display","block");
             form.render();
@@ -151,16 +158,16 @@
 		<div class="layui-form-item" >
 			<label class="layui-form-label">级别：</label>
 			<div class="layui-input-inline">
-				<input type="radio" name="pid" value="0" lay-filter="level"  title="一级" checked>
-				<input type="radio" name="pid" value="-1" lay-filter="level"   title="二级" >
+				<input type="radio" name="type" value="0" lay-filter="level"  title="一级" checked>
+				<input type="radio" name="type" value="1" lay-filter="level"   title="二级"  >
 			</div>
 		</div>
-		<input type="hidden" name="parentId" id="pid">
+		<!--<input type="hidden" name="parentId" id="pid">-->
 		<div class="layui-form-item" id="dvl1" style="display: none" >
 			<label class="layui-form-label">上级路径：</label>
 			<div class="layui-input-inline">
-				<select onselect="setPid(this)" id="spid" >
-
+				<select name="parentid" onselect="setPid(this)" id="spid" >
+					<option value="0"></option>
 				</select>
 
 			</div>

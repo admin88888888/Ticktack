@@ -55,10 +55,36 @@ public class AuthorityController {
         return map;
     }
 
+    /**
+     * 获取所有一级权限
+     * @return
+     */
     @RequestMapping("roleOneAll.do")
     public List<Authority> findAuthorityOneAll(){
 
         List<Authority> list = authorityService.findAuthorityAllOne();
         return list;
+    }
+
+    @RequestMapping("authorityAdd.do")
+    public JsonBean insertSelective(Authority record){
+
+        int a = authorityService.insertSelective(record);
+        if (a == -1){
+            return JsonUtils.createJsonBean(1000,null);
+        } else {
+            return JsonUtils.createJsonBean(1000,null);
+        }
+
+    }
+
+    @RequestMapping("deleteAuthority.do")
+    public JsonBean deleteByPrimaryKey(Integer id){
+        int a = authorityService.deleteByPrimaryKey(id);
+        if (a == -1){
+            return JsonUtils.createJsonBean(1000,null);
+        } else {
+            return JsonUtils.createJsonBean(1000,null);
+        }
     }
 }

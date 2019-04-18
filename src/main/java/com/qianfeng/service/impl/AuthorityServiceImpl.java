@@ -61,5 +61,32 @@ public class AuthorityServiceImpl implements AuthorityService {
         return list;
     }
 
+    @Override
+    public int insertSelective(Authority record) {
+        Authority authority = authorityMapper.findByTitle(record.getTitle());
+        if (authority != null){
+            return -1;
+        }
+
+        try {
+            authorityMapper.insertSelective(record);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        try {
+            int a = authorityMapper.deleteByPrimaryKey(id);
+            return a;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  -1;
+        }
+
+    }
+
 
 }

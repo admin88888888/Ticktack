@@ -48,7 +48,7 @@
         // 指定图表的配置项和数据
         var option = {
             title : {
-                text: obj.id+'流程统计',
+                text: obj[0].pid+'流程统计',
                 subtext: '效率分析'
             },
             tooltip : {
@@ -70,7 +70,7 @@
             xAxis : [
                 {
                     type : 'category',
-                    data :obj.datax
+                    data :obj[0]
                 }
             ],
             yAxis : [
@@ -82,7 +82,7 @@
                 {
                     name:'开始时间',
                     type:'bar',
-                    data:obj.datas1,
+                    data:obj[0].startdate,
                     markPoint : {
                         data : [
                             {type : 'max', name: '最大值'},
@@ -98,7 +98,7 @@
                 {
                     name:'结束时间',
                     type:'bar',
-                    data:obj.datas2,
+                    data:obj[0].enddate,
                     markPoint : {
                         data : [
                             {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
@@ -113,7 +113,7 @@
                 }, {
                     name:'差值',
                     type:'bar',
-                    data:obj.datas3,
+                    data:obj[0].days,
                     markPoint : {
                         data : [
                             {type : 'max', name: '最大值'},

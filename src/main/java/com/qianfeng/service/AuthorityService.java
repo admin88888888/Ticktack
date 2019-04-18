@@ -34,4 +34,13 @@ public interface AuthorityService  {
      * @return
      */
     List<Authority> findAuthorityAllOne();
+
+    /**
+     * 添加权限
+     * @param record
+     * @return
+     */
+    int insertSelective(Authority record);
+
+    int deleteByPrimaryKey(Integer id);
 }

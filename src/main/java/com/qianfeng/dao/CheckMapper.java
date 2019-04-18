@@ -85,4 +85,11 @@ public interface CheckMapper {
      */
     List<Check> findCheckByStartName(String startname);
 
+    /**
+     * 通过任务号查询记录
+     * @param pid
+     * @return
+     */
+    Check findByPid(String pid);
+
 }
