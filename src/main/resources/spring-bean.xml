@@ -25,9 +25,9 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		  init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/tick1808" />
-		<property name="username" value="root" />
-		<property name="password" value="123456" />
+		<property name="url" value="jdbc:mysql://10.8.159.16:3306/tick1808" />
+		<property name="username" value="cyx" />
+		<property name="password" value="321" />
 		<!-- 配置初始化大小、最小、最大 -->
 		<property name="initialSize" value="1" />
 		<property name="minIdle" value="1" />
@@ -154,17 +154,17 @@
 				<!--  一般设置和认证相关的配置
 				 	和权限相关的一般使用注解
 				 -->
-				/login.html = anon
+				<!--/login.html = anon
 				/login.do = anon
-				/media/** = anon   <!-- 静态资源匿名访问 -->
+				/media/** = anon   &lt;!&ndash; 静态资源匿名访问 &ndash;&gt;
 				/static/** = anon
 				/test1.do = perms["user:list"]
 				/test2.do = perms["aaaa"]
-				<!-- 配置退出的操作 -->
+				&lt;!&ndash; 配置退出的操作 &ndash;&gt;
 				/logout.do = logout
-				<!--  访问其他没有匹配上的资源时，都经过身份认证 -->
-				<!--/** = authc-->
-				/** = user   <!--  如果涉及rememberMe功能，需要使用user -->
+				&lt;!&ndash;  访问其他没有匹配上的资源时，都经过身份认证 &ndash;&gt;
+				&lt;!&ndash;/** = authc&ndash;&gt;
+				/** = user   &lt;!&ndash;  如果涉及rememberMe功能，需要使用user &ndash;&gt;-->
 			</value>
 		</property>
 	</bean>

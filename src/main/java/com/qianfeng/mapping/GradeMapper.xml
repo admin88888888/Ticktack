@@ -14,7 +14,7 @@
     id, name, flag, week, createdate, location, cid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_grade
     where id = #{id,jdbcType=INTEGER}
@@ -24,14 +24,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.qianfeng.entity.Grade">
-    insert into t_grade (id, name, flag, 
-      week, createdate, location, 
+    insert into t_grade (id, name, flag,
+      week, createdate, location,
       cid)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, 
-      #{week,jdbcType=INTEGER}, #{createdate,jdbcType=DATE}, #{location,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER},
+      #{week,jdbcType=INTEGER}, #{createdate,jdbcType=DATE}, #{location,jdbcType=VARCHAR},
       #{cid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.qianfeng.entity.Grade">
+  <insert id="add" parameterType="com.qianfeng.entity.Grade">
     insert into t_grade
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -114,4 +114,20 @@
       cid = #{cid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 额外增加 -->
+  <select id="selectGrade" resultType="com.qianfeng.entity.Grade">
+    select <include refid="Base_Column_List"></include>
+    from t_grade
+  </select>
+
+  <select id="findAll" resultType="com.qianfeng.vo.VGrade">
+     select g.*,c.name cname,
+     (select count(*) from t_student s where s.gid = g.id) as cnum
+     from t_grade g
+     inner join t_course c
+     on c.id = g.cid
+     where g.flag=1
+  </select>
+
 </mapper>

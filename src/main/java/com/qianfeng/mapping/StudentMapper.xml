@@ -22,7 +22,7 @@
     no, name, sex, birthday, cardno, school, education, gid, flag, email, qq, phone, 
     introno, createdate, photo
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="findByNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_student
@@ -44,7 +44,7 @@
       #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{introno,jdbcType=VARCHAR}, 
       #{createdate,jdbcType=DATE}, #{photo,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qianfeng.entity.Student">
+  <insert id="add" parameterType="com.qianfeng.entity.Student">
     insert into t_student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="no != null">
@@ -207,4 +207,30 @@
       photo = #{photo,jdbcType=VARCHAR}
     where no = #{no,jdbcType=VARCHAR}
   </update>
+
+    <!-- 额外增加 -->
+  <select id="findAll" resultType="com.qianfeng.vo.VStudent">
+    select stu.no, stu.name,g.name gradename, stu.sex, stu.phone,stu.email,stu.school,stu.education,stu.birthday,stu.createdate from t_student stu
+    inner join t_grade g
+    on stu.gid=g.id
+  </select>
+
+  
+  <delete id="deleteByNo" parameterType="java.lang.String">
+    delete from t_student
+    where no = #{no,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="addBatch" parameterType="list">
+    insert into t_student(<include refid="Base_Column_List" />)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.no}, #{item.name}, #{item.sex},
+      #{item.birthday}, #{item.cardno}, #{item.school},
+      #{item.education}, #{item.gid}, #{item.flag},
+      #{item.email}, #{item.qq}, #{item.phone}, #{item.introno},
+      #{item.createdate}, #{item.photo})
+    </foreach>
+  </insert>
+
 </mapper>
