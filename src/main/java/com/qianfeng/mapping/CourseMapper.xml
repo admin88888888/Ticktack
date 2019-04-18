@@ -106,7 +106,15 @@
 
   <select id="findAll" resultType="com.qianfeng.entity.Course">
     select <include refid="Base_Column_List"></include>
-    from t_course
+    from t_course where flag = 1
   </select>
 
+  <select id="findCourseByName" resultType="com.qianfeng.entity.Course">
+    select <include refid="Base_Column_List"></include>
+    from t_course where name = #{name}
+  </select>
+
+  <update id="flagDeleteCourse" parameterType="int">
+    update t_course set flag = 0 where id = #{id}
+  </update>
 </mapper>

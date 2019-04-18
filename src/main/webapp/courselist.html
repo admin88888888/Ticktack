@@ -27,7 +27,7 @@
 		  //第一个实例
 		  table.render({
 		    elem: '#tbdata'
-		    ,url: 'coursepage.do' //数据接口
+		    ,url: 'course/list.do' //数据接口
 		    ,page: true //开启分页
 		    ,cols: [[ //表头
 		      {field: 'id', title: '序号', sort: true, fixed: 'left'}
@@ -44,7 +44,7 @@
 		        if(obj.event === 'del'){
 		            layer.confirm('是否确认删除学科?', function(index){
 		                $.ajax({
-		                    url: "coursedelete.do",
+		                    url: "course/flagDelete.do",
 		                    type: "POST",
 		                    data:"id="+data.id,
 		                    success: function(data){

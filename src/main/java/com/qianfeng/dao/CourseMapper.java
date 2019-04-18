@@ -22,4 +22,12 @@ public interface CourseMapper {
      */
     public List<Course> findAll();
 
+    /**
+     * 通过名称获取课程信息
+     * @param name
+     * @return
+     */
+    Course findCourseByName(String name);
+
+    void flagDeleteCourse(int id);
 }
