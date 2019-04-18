@@ -79,4 +79,16 @@
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 额外增加 -->
+  <select id="findAll" resultType="com.qianfeng.vo.VDepart">
+    select d.*, (select count(*) from t_staff s where s.did=d.id) as snum
+    from t_depart d
+  </select>
+
+  <select id="findByName" parameterType="java.lang.String" resultType="com.qianfeng.entity.depart">
+    select <include refid="Base_Column_List"></include>
+    from t_depart where name = #{name}
+  </select>
+
 </mapper>

@@ -12,9 +12,17 @@
 	<typeAliases>
 		<typeAlias type="com.qianfeng.entity.Student" alias="student"/>
 		<typeAlias type="com.qianfeng.entity.Grade" alias="grade"/>
+		<typeAlias type="com.qianfeng.entity.Staff" alias="staff"/>
+		<typeAlias type="com.qianfeng.vo.VStaff" alias="vstaff"/>
+
 	</typeAliases>
 
-
+<plugins>
+	<plugin interceptor="com.github.pagehelper.PageInterceptor">
+		<!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+		<property name="helperDialect" value="mysql"/>
+	</plugin>
+</plugins>
 	
 </configuration>
 
