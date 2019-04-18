@@ -1,14 +1,13 @@
 package com.qianfeng.utils;
 
+
 import com.qianfeng.common.JsonBean;
 
 public class JsonUtils {
-
-	public static JsonBean createJsonBean(int code, Object info){
-		JsonBean bean = new JsonBean();
-		bean.setCode(code);
-		bean.setInfo(info);
-		
-		return bean;
+	public static JsonBean createJsonBean(int code, Object info) {
+		JsonBean jsonBean = new JsonBean();
+		jsonBean.setCode(code);
+		jsonBean.setInfo(info);
+		return jsonBean;
 	}
 }

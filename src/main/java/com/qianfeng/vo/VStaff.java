@@ -1,13 +1,16 @@
-package com.qianfeng.entity;
+package com.qianfeng.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class Staff {
+public class VStaff {
     private String no;
 
     private String name;
+    private String deptName;
+
 
     private Integer did;
 
@@ -21,7 +24,6 @@ public class Staff {
 
     private String phone;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdate;
 
     private String photo;
@@ -42,6 +44,13 @@ public class Staff {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
     public Integer getDid() {
         return did;
     }
@@ -90,10 +99,14 @@ public class Staff {
         this.phone = phone == null ? null : phone.trim();
     }
 
+    // 传送给前端用
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public Date getCreatedate() {
         return createdate;
     }
 
+    // 接收前端传过来的数据用
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
@@ -106,3 +119,4 @@ public class Staff {
         this.photo = photo == null ? null : photo.trim();
     }
 }
+

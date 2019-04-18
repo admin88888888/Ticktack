@@ -17,7 +17,7 @@
     no, name, did, flag, sex, email, qq, phone, createdate, photo
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_staff
     where no = #{no,jdbcType=VARCHAR}
@@ -36,7 +36,7 @@
       #{phone,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{photo,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.qianfeng.entity.Staff">
+  <insert id="addStaff" parameterType="com.qianfeng.entity.Staff">
     insert into t_staff
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="no != null">
@@ -149,4 +149,63 @@
       photo = #{photo,jdbcType=VARCHAR}
     where no = #{no,jdbcType=VARCHAR}
   </update>
+  <!--额外添加-->
+
+  <!--查询所有员工-->
+  <select id="staffFindAll"   resultType="vstaff">
+    select s.*, d.name deptName from t_staff s
+    inner join t_depart d
+    on s.did = d.id
+    where s.flag = 1
+  </select>
+
+  <!--添加操作  (no, name, did, flag, sex, email, qq, phone, createdate, photo)-->
+  <insert id="addStafff" parameterType="staff">
+    insert into t_staff
+    values (#{no}, #{name}, #{did}, 1, #{sex}, #{email}, #{qq}, #{phone}, #{createdate}, #{photo})
+  </insert>
+  <!--// 根据员工姓名查询数据-->
+  <select id="findStaffByName" parameterType="String" resultType="staff">
+    select <include refid="Base_Column_List" />
+    from t_staff
+    where name = #{name}
+  </select>
+
+  <!-- 修改操作 -->
+  <select id="findStaffByNo" parameterType="String" resultType="staff">
+    select s.name, s.did, s.sex, s.email, s.phone, s.qq, s.createdate, s.photo
+    from t_staff s
+    inner join t_depart d
+    on s.did = d.id
+    where s.no = #{no}
+  </select>
+  <update id="updateStaff" parameterType="staff">
+    update t_staff set name=#{name},did=#{did},sex=#{sex},email=#{email},phone=#{phone},
+    qq=#{qq},createdate=#{createdate},photo=#{photo}
+    where no = #{no}
+  </update>
+
+  <!-- 员工删除 -->
+  <update id="deleteStaffByNo" parameterType="String">
+    update t_staff set flag = 2 where no=#{no}
+  </update>
+
+  <!--员工更改为有效-->
+  <update id="updateStaffFlag" parameterType="staff">
+    update t_staff set flag = 1 where no=#{no}
+  </update>
+
+  <!-- 查询所有招生老师 -->
+  <select id="selectAllRecruiter" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_staff s where s.did=4
+  </select>
+
+  <!--批量导入-->
+  <insert id="addBatch" parameterType="list">
+    insert into t_staff
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.no}, #{item.name}, #{item.did}, #{item.flag}, #{item.sex}, #{item.email}, #{item.qq}, #{item.phone}, #{item.createdate}, #{item.photo})
+    </foreach>
+  </insert>
 </mapper>
