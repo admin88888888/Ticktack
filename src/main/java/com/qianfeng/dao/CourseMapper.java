@@ -2,6 +2,8 @@ package com.qianfeng.dao;
 
 import com.qianfeng.entity.Course;
 
+import java.util.List;
+
 public interface CourseMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,10 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    /**
+     * 查询所有学科
+     */
+    public List<Course> findAll();
+
 }

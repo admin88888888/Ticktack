@@ -103,4 +103,10 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAll" resultType="com.qianfeng.entity.Course">
+    select <include refid="Base_Column_List"></include>
+    from t_course
+  </select>
+
 </mapper>

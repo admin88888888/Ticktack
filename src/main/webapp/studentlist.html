@@ -14,7 +14,7 @@
 	<div class="layui-container">
 		<table id="tbdata" lay-filter="tbop"></table>
 		<script type="text/html" id="barop">
-			<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail">查看详情</a>
+			<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="detail">编辑</a>
     		<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
     		
 		</script>
@@ -28,20 +28,20 @@
 		  //第一个实例
 		  table.render({
 		    elem: '#tbdata'
-		    ,url: 'studentpage.do' //数据接口
+		    ,url: '/Ticktack/stu/list.do' //数据接口
 		    ,page: true //开启分页
 		    ,cols: [[ //表头
-		      {field: 'no', title: '学号', sort: true, fixed: 'left'}
-		      ,{field: 'name', title: '学员名称'}
-		      ,{field: 'gname', title: '所在班级'}
-		      ,{field: 'sex', title: '性别'}
-		      ,{field: 'phone', title: '手机号'}
-		      ,{field: 'email', title: '邮箱'}
-		      ,{field: 'school', title: '毕业学校'}
-		      ,{field: 'education', title: '学历'}
-		      ,{field: 'birthday', title: '出生日期'}
-		      ,{field: 'createdate', title: '入学日期'}
-		      ,{field:'right', title: '操作',toolbar:"#barop"}
+		      {field: 'no', title: '学号',width:90,sort: true, fixed: 'left'}
+		      ,{field: 'name', title: '学员名称',width:90}
+		      ,{field: 'gradename', title: '所在班级',width:140}
+		      ,{field: 'sex', title: '性别',width:60}
+		      ,{field: 'phone', title: '手机号',width:80}
+		      ,{field: 'email', title: '邮箱',width:160}
+		      ,{field: 'school', title: '毕业学校',width:90}
+		      ,{field: 'education', title: '学历',width:60}
+		      ,{field: 'birthday', title: '出生日期',width:160}
+		      ,{field: 'createdate', title: '入学日期',width:160}
+		      ,{field:'right', title: '操作',toolbar:"#barop",width:170}
 		    ]]
 		  });
 		  //监听工具条
@@ -50,9 +50,10 @@
 		        if(obj.event === 'del'){
 		            layer.confirm('是否确认删除学员?', function(index){
 		                $.ajax({
-		                    url: "studentdelete.do",
-		                    type: "POST",
-		                    data:"no="+data.no,
+		                    url: "/Ticktack/stu/studentdelete.do?no=" + data.no,
+		                    type: "get",
+		                    /*data:"no="+data.no,*/
+							dataType:'json',
 		                    success: function(data){
 		                        if(data.code==1000){
 		                            obj.del();//删除表格中的对应行数据
@@ -61,16 +62,19 @@
 		                        }else{
 		                            layer.msg("删除失败", {icon: 5});
 		                        }
+								table.init();
 		                    }
 		                });
 		            });
 		        } else if(obj.event === 'detail'){//编辑 修改
-		          // location.href="staffupdate.html?d="+ encodeURI(JSON.stringify(data));
-		           	layer.msg(JSON.stringify(data));
+					//get传递参数有中文，必须编码
+					//JSON.stringify 将对象转换为字符串
+					console.log(JSON.stringify(data));
+					location.href="studentupdate.html?no="+ encodeURI(JSON.stringify(data));
 		        }
 		});
 	});
-
 </script>
+
 </body>
 </html>

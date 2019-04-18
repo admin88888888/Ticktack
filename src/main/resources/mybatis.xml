@@ -10,8 +10,8 @@
 
 	<!-- 设置类型的别名 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.qianfeng.crud.Employee" alias="employee"/> -->
-		<!--<typeAlias type="com.qianfeng.entity.Employee" alias="employee"/>-->
+		<typeAlias type="com.qianfeng.entity.Student" alias="student"/>
+		<typeAlias type="com.qianfeng.entity.Grade" alias="grade"/>
 	</typeAliases>
 
 
