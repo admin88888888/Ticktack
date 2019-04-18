@@ -156,7 +156,6 @@
 				 -->
 				/login.html = anon
 				/login.do = anon
-				/loginOut.do = anon
 				/media/** = anon   <!-- 静态资源匿名访问 -->
 				/static/** = anon
 				/test1.do = perms["user:list"]

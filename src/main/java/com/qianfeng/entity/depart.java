@@ -1,5 +1,7 @@
 package com.qianfeng.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class depart {
@@ -7,6 +9,7 @@ public class depart {
 
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
 
     private Integer flag;

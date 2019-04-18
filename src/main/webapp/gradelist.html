@@ -27,17 +27,17 @@
 		  //第一个实例
 		  table.render({
 		    elem: '#tbdata'
-		    ,url: 'gradepage.do' //数据接口
+		    ,url: '/Ticktack/grade/list.do' //数据接口
 		    ,page: true //开启分页
 		    ,cols: [[ //表头
-		      {field: 'id', title: '序号', sort: true, fixed: 'left'}
-		      ,{field: 'name', title: '班级名称'} 
-		      ,{field: 'cname', title: '学科名称'}
-		      ,{field: 'count', title: '班级人数', sort: true}
-		      ,{field: 'week', title: '周数', sort: true}
-		      ,{field: 'location', title: '位置'}
-		      ,{field: 'createdate', title: '开班日期', sort: true}
-		      ,{field:'right', title: '操作',toolbar:"#barop"}
+		      {field: 'id', title: '序号', sort: true, fixed: 'left',width:70}
+		      ,{field: 'name', title: '班级名称',width:140}
+		      ,{field: 'cname', title: '学科名称',width:130}
+		      ,{field: 'cnum', title: '班级人数', sort: true,width:100}
+		      ,{field: 'week', title: '周数', sort: true,width:70}
+		      ,{field: 'location', title: '位置',width:200}
+		      ,{field: 'createdate', title: '开班日期', sort: true,width:160}
+		      ,{field:'right', title: '操作',toolbar:"#barop",width:170}
 		    ]]
 		  });
 		  //监听工具条
@@ -46,7 +46,7 @@
 		        if(obj.event === 'del'){
 		            layer.confirm('是否确认删除班级?', function(index){
 		                $.ajax({
-		                    url: "gradedelete.do",
+		                    url: "/Ticktack/grade/gradedelete.do",
 		                    type: "POST",
 		                    data:"id="+data.id,
 		                    success: function(data){

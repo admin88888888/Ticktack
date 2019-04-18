@@ -49,7 +49,13 @@
     <!-- 将静态资源 交给tomcat默认的servlet进行处理 -->
     <mvc:default-servlet-handler/>
     <!--<mvc:resources mapping="/js/**" location="/js/"></mvc:resources>-->
-    
+
+    <!-- 文件上传的解析器  id的值不能改-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件的最大大小 ，单位字节 ，比如 1024 * 1024 = 1M-->
+        <property name="maxUploadSize" value="1048576"></property>
+
+    </bean>
     
     <!-- 1 如果针对控制器中的方法的形参，可以直接使用相关验证的注解，需要增加该配置 -->
     <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>

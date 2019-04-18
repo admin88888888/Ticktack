@@ -1,5 +1,7 @@
 package com.qianfeng.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Student {
@@ -9,6 +11,7 @@ public class Student {
 
     private String sex;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String cardno;
@@ -29,7 +32,9 @@ public class Student {
 
     private String introno;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdate;
+
 
     private String photo;
 

@@ -1,5 +1,7 @@
 package com.qianfeng.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Grade {
@@ -11,6 +13,7 @@ public class Grade {
 
     private Integer week;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdate;
 
     private String location;

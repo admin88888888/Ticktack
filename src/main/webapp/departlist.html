@@ -27,14 +27,14 @@
 		  //第一个实例
 		  table.render({
 		    elem: '#tbdata'
-		    ,url: 'departpage.do' //数据接口
+		    ,url: '/Ticktack/dep/list.do' //数据接口
 		    ,page: true //开启分页
 		    ,cols: [[ //表头
-		      {field: 'id', title: '序号', sort: true, fixed: 'left'}
-		      ,{field: 'name', title: '部门名称'}
-		      ,{field: 'dcount', title: '部门人数', sort: true}
-		      ,{field: 'createtime', title: '成立日期'}
-		      ,{field:'right', title: '操作',toolbar:"#barop"}
+		      {field: 'id', title: '序号', sort: true, fixed: 'left',width:70}
+		      ,{field: 'name', title: '部门名称',width:90}
+		      ,{field: 'snum', title: '部门人数', sort: true,width:100}
+		      ,{field: 'createtime', title: '成立日期',width:170}
+		      ,{field:'right', title: '操作',toolbar:"#barop",width:170}
 		    ]]
 		  });
 		  //监听工具条
@@ -43,7 +43,7 @@
 		        if(obj.event === 'del'){
 		            layer.confirm('是否确认删除部门?', function(index){
 		                $.ajax({
-		                    url: "departdelete.do",
+		                    url: "/Ticktack/dep/delete.do",
 		                    type: "POST",
 		                    data:"id="+data.id,
 		                    success: function(data){
