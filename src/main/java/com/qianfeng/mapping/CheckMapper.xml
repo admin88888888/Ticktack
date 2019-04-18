@@ -195,4 +195,8 @@
 <select id="findCheckByStartName" parameterType="String" resultType="com.qianfeng.entity.Check">
   select pid from t_check where startname = #{startname,jdbcType=VARCHAR}
 </select>
+  <!--通过任务号查询记录-->
+  <select id="findByPid" parameterType="String" resultType="com.qianfeng.entity.Check">
+    select * from t_check where pid = #{pid}
+  </select>
 </mapper>

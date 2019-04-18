@@ -168,4 +168,8 @@
   <select id="findRoleSecondAuthority" parameterType="int" resultType="com.qianfeng.entity.Authority">
     select id from t_authority where parentId = #{id};
   </select>
+
+  <select id="findByTitle" parameterType="String" resultType="com.qianfeng.entity.Authority">
+    select id from t_authority where title = #{title};
+  </select>
 </mapper>

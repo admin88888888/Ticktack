@@ -27,4 +27,13 @@ public class LoginController {
         }
 
     }
+
+    @RequestMapping("loginOut.do")
+    public String LoginOut(){
+        Subject subject = SecurityUtils.getSubject();
+
+        subject.logout();
+        return "redirect:/login.html";
+
+    }
 }

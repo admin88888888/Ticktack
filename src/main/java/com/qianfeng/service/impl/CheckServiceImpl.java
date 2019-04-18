@@ -114,4 +114,16 @@ public class CheckServiceImpl implements CheckService {
         }
         return i;
     }
+
+    @Override
+    public Check findByPid(String pid) {
+
+        Check check = null;
+        try {
+            check = checkMapper.findByPid(pid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
 }
