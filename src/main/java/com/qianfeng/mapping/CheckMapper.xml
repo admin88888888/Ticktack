@@ -12,6 +12,7 @@
     <result column="days" jdbcType="INTEGER" property="days" />
     <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="rname" jdbcType="INTEGER" property="rname" />
   </resultMap>
   <sql id="Base_Column_List">
     id, info, type, startname, startno, startdate, enddate, days, pid, flag
@@ -69,6 +70,9 @@
       <if test="flag != null">
         flag,
       </if>
+      <if test="rname != null">
+        rname,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,6 +104,9 @@
       </if>
       <if test="flag != null">
         #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="rname != null">
+        #{rname},
       </if>
     </trim>
   </insert>
@@ -149,4 +156,43 @@
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--额外添加-->
+  <!--分页查询考勤管理代办信息-->
+  <select id="findCheckToDo" parameterType="map" resultType="com.qianfeng.entity.Check">
+    select <include refid="Base_Column_List" />
+     from t_check where flag = 1 limit #{start}, #{limit}
+  </select>
+
+  <!--获取考勤管理信息总数-->
+  <select id="findCheckCount" resultType="int">
+    select count(1) from t_check
+  </select>
+
+  <!--获取待处理总数-->
+  <select id="findToDoCount"  resultType="int">
+    select count(1) from t_check where flag = 1
+  </select>
+
+  <!--获取我的记录总数-->
+  <select id="findRecordCount" parameterType="String" resultType="int">
+    select count(1) from t_check where startname = #{startname}
+  </select>
+
+  <!--获取我的所有记录信息-->
+  <select id="findCheckAll" parameterType="map" resultType="com.qianfeng.entity.Check">
+    select <include refid="Base_Column_List" />
+    from t_check where startname = #{startname} limit #{start}, #{limit}
+  </select>
+
+  <!--事项进行对指定记录进行状态改变flag为2同意，flag为3拒绝-->
+  <update id="updateMatter" parameterType="map">
+    update t_check set flag = #{flag} where id = #{id}
+  </update>
+
+  <!--通过发起人姓名获取记录信息-->
+<select id="findCheckByStartName" parameterType="String" resultType="com.qianfeng.entity.Check">
+  select pid from t_check where startname = #{startname,jdbcType=VARCHAR}
+</select>
 </mapper>

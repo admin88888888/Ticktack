@@ -33,4 +33,27 @@
       </if>
     </trim>
   </insert>
+
+
+<!--额外添加-->
+  <delete id="deleteUserRole" parameterType="map" >
+    delete from t_userrole
+    <where>
+      <if test="uid != null and uid != ''">
+        and uid = #{uid}
+      </if>
+      <if test="rid != null and rid != ''">
+        and rid = #{rid}
+      </if>
+    </where>
+  </delete>
+
+  <select id="findUserRole" parameterType="int" resultMap="BaseResultMap">
+    select * from t_userrole where uid = #{id}
+  </select>
+
+  <insert id="addUserRole" parameterType="map">
+    insert into t_userrole (uid, rid)
+    values (#{uid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER})
+  </insert>
 </mapper>

@@ -12,19 +12,19 @@
 </head>
 <body>
 	<div class="layui-container" style="margin-top: 5px">
-		<form class="layui-form layui-form-pane" action="processadd.do" method="post" >
+		<form class="layui-form layui-form-pane" action="processAdd.do" method="post" >
 			<div class="layui-form-item">
 
 					<label class="layui-form-label">起始日期</label>
 					<div class="layui-input-block">
-						<input type="text" name="startDate" class="layui-input mydate">
+						<input type="text" name="startdate" class="layui-input mydate">
 					</div>
 
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">结束日期</label>
 				<div class="layui-input-block">
-					<input type="text" name="endDate" class="layui-input mydate">
+					<input type="text" name="enddate" class="layui-input mydate">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -52,7 +52,6 @@
 				<div class="layui-input-block">
 					<select name="rname"  id="cds">
 						<option value="-1">--请选择领导--</option>
-						<option value="张三">张三</option>
 					</select>
 				</div>
 			</div>
@@ -88,23 +87,52 @@
 									if (value.length < 5) {
 										return '标题至少得5个字符啊';
 									}
-								},
-								pass : [ /(.+){6,12}$/, '密码必须6到12位' ],
-								content : function(value) {
-									layedit.sync(editIndex);
 								}
+								,startdate:function(value) {
+									if (value.length == 0) {
+										return '起始日期不可为空';
+									}
+								}
+								,enddate:function(value) {
+									if (value.length == 0) {
+										return '起始日期不可为空';
+									}
+								}
+								,type:function(value) {
+									if (value == -1) {
+										return '请选择请假类型';
+									}
+								}
+								,rname:function(value) {
+									if (value == -1) {
+										return '请选择审批领导';
+									}
+								}
+								,info :function(value) {
+									if (value.length == 0) {
+										return '请假理由必须填写';
+									}
+								}
+								//pass : [ /(.+){6,12}$/, '密码必须6到12位' ],
+								/*content : function(value) {
+									layedit.sync(editIndex);
+								}*/
 							});
 					initData();
+
+
 		});
 		//初始化数据
 		function initData() {
-			$.get("departall.do",null,function(arr){
+			$.get("findLeaders.do",null,function(arr){
 				for(i=0;i<arr.length;i++){
-					$("#cds").append("<option value='"+arr[i].id+"'>"+arr[i].name+"</option>");
+					$("#cds").append("<option value='"+arr[i].name+"'>"+arr[i].name+"</option>");
 				}
 				form.render("select");
 			});
 		}
+
+
 	</script>
 </body>
 </html>
