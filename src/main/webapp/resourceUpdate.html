@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:display="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>滴答办公系统-修改权限</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="media/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="media/css/font-awesome.min.css">
+<script src="media/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//获取请求参数
+			var json=getData();
+			//解码参数值并解析json
+			var obj=JSON.parse(decodeURI(json));
+			//显示数据
+			showData(obj);
+		})
+		//获取传递的参数信息
+		function getData() {
+			var url=window.location.search;
+			index=url.indexOf("?");
+			if(index>-1){
+				var str = url.substr(index+1);
+				if(str.indexOf('=')){
+					return str.split('=')[1];
+				}
+			}
+			return null;
+		}
+		//显示数据
+		function showData(obj) {
+			$("#int1").val(obj.title);
+			$("#int2").val(obj.aicon);
+			$("#int3").val(obj.aurl);
+			if (obj.type == 0){
+
+				$("#int4").attr("checked", true);;
+			} else {
+				$("#int5").attr("checked", true);;
+			}
+			$("#spid").val(obj.parentid);
+
+		}
+	</script>
+</head>
+<body>
+<div style="margin-top: 10px;width: 480px" id="dvlay">
+	<form id="fm1" class="layui-form " >
+		<div class="layui-form-item"  >
+			<label class="layui-form-label">名称：</label>
+			<div class="layui-input-inline">
+				<input id="int1" name="title" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item"  >
+			<label class="layui-form-label">图标：</label>
+			<div class="layui-input-inline">
+				<input id="int2" name="aicon" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" >
+			<label class="layui-form-label">路径：</label>
+			<div class="layui-input-inline">
+				<input id="int3" name="aurl" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" >
+			<label class="layui-form-label">级别：</label>
+			<div class="layui-input-inline">
+				<input id="int4" type="radio" name="type" value="0" lay-filter="level"  title="一级" checked>
+				<input id="int5" type="radio" name="type" value="1" lay-filter="level"   title="二级"  >
+			</div>
+		</div>
+		<!--<input type="hidden" name="parentId" id="pid">-->
+		<div class="layui-form-item" id="dvl1" style="display: none" >
+			<label class="layui-form-label">上级路径：</label>
+			<div class="layui-input-inline">
+				<select name="parentid" onselect="setPid(this)" id="spid" >
+					<option value="0"></option>
+				</select>
+
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<input class="layui-btn"  style="margin-left: 10%"  type="submit" value="确认修改">
+		</div>
+	</form>
+</div>
+	<script src="media/layui/layui.js"></script>
+	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+	<script>
+		var form;
+		layui.use([ 'form', 'laydate' ],
+				function() {
+					form = layui.form, layer = layui.layer, laydate = layui.laydate;
+					form.on('radio(level)', function (data) {
+						changePid(data.value);
+					});
+				});
+
+
+
+
+    function changePid(i) {
+		if(i==1){
+            $.get("roleOneAll.do",null,function (arr) {
+				for(i=0;i<arr.length;i++){
+                    $("#spid").append("<option  value=\""+arr[i].id+"\">"+arr[i].title+"</option>");
+				}
+            $("#dvl1").css("display","block");
+            form.render();
+            });
+		}else{
+            $("#dvl1").css("display","none");
+		    $("#pid").val(i);
+		}
+    }
+    function setPid(obj) {
+        $("#pid").val(obj.value());
+    }
+</script>
+</body>
+
+</html>

@@ -140,7 +140,7 @@
 
   <!--获取所有权限信息-->
   <select id="findAll" resultType="com.qianfeng.entity.Authority">
-    select5
+    select
 
     <include refid="Base_Column_List" />
     from t_authority limit #{start},#{limit}
